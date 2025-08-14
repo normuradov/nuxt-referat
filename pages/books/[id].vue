@@ -203,6 +203,25 @@ useSeoMeta({
   ogImage: () => book.value?.cover_image || 'https://referat.uz/default-og-image.png'
 });
 
+// Strukturaviy ma'lumotlar (Schema.org)
+useSchemaOrg([
+  defineArticle({
+    '@type': 'ScholarlyArticle',
+    'headline': () => book.value?.title,
+    'description': () => pageDescription.value,
+    'author': () => book.value?.author ? [{ name: book.value.author }] : [],
+    'inLanguage': 'uz',
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'Referat.uz',
+      'logo': {
+        '@type': 'ImageObject',
+        'url': 'https://referat.uz/logo.webp'
+      }
+    }
+  })
+])
+
 </script>
 
 
