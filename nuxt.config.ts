@@ -1,5 +1,4 @@
 // nuxt.config.ts
-
 import { defineNuxtConfig } from 'nuxt/config';
 
 export default defineNuxtConfig({
@@ -7,8 +6,20 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-26',
   devtools: { enabled: true },
 
+  // SEO moduli
+  modules: [
+    '@nuxtjs/seo'
+  ],
+
+  // Saytning asosiy manzili
+  site: {
+    url: 'https://referat.uz',
+    name: 'Referat.uz',
+    description: 'O‘zbekistondagi talabalar va tadqiqotchilar uchun ilmiy adabiyotlar olami. Minglab referatlar, dissertatsiyalar va ilmiy ishlar.',
+    defaultLocale: 'uz',
+  },
+
   // Barcha sahifalar uchun Server-Side Rendering (SSR) yoqish.
-  // Bu qoida saytning barcha qismlari serverda tayyorlanishini ta'minlaydi.
   ssr: true,
 
   runtimeConfig: {
@@ -20,11 +31,17 @@ export default defineNuxtConfig({
     '/search': { ssr: true }
   },
   
-  
-  
   // Vite server sozlamalari
   vite: {
     server: {
+      fs: {
+        allow: [
+          '/home/ubuntu/www/referat'
+        ]
+      },
+      allowedHosts: [
+        'referat.uz'
+      ],
       hmr: { // Hot Module Replacement sozlamalari (faqat dev rejimida)
         protocol: 'wss',
         host: 'referat.uz',
@@ -47,8 +64,4 @@ export default defineNuxtConfig({
       linkExactActiveClass: 'nuxt-link-exact-active'
     }
   },
-
-  // Eslatma: `runtimeConfig` bloki olib tashlandi, chunki u 2-yechim uchun edi.
-  // `routeRules` sozlamasi bilan proksi to'g'ri ishlaganligi sababli, unga ehtiyoj yo'q.
-
 });
